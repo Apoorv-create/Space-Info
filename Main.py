@@ -1,33 +1,53 @@
 from tkinter import *
 from PIL import ImageTk, Image
+from tkinter import ttk
 
 root = Tk()
 root.title("Planet Info")
 root.geometry("400x400")
 
+Mercury = ImageTk.PhotoImage(Image.open("P:\\Planet Info Python Project\\mercury.jpg"))
+Venus = ImageTk.PhotoImage(Image.open("P:\\Planet Info Python Project\\venus.jpg"))
+Earth = ImageTk.PhotoImage(Image.open("P:\\Planet Info Python Project\\earth.jpg"))
 
-#image2 =Image.open('C:\\Users\\adminp\\Desktop\\titlepage\\front.gif')
-#image1 = ImageTk.PhotoImage(image2)
-#w = image1.width()
-#h = image1.height()
 
-#bg = PhotoImage(file = "C:\\space.jpg")
-#root.configure(background = bg)
-
-#canv = Canvas(root, width=80, height=80, bg='white')
-#canv.grid(row=2, column=3)
-
-#img = PhotoImage(file="C:\\\space.jpg")
-#canv.create_image(20,20, anchor=NW, image=img)
-
-label_planet = Label(root, text = "Planet : ", bg = "darkblue")
-label_planet_name = Label(root, font=("courier", 18, "italic"),bg = "darkblue")
+label_planet = Label(root, text = "Planet : ", bg = "lightblue")
+label_planet_name = Label(root, font=("courier", 18, "italic"),bg = "lightblue")
 label_planet_image = Label(root, bg = "gold", highlightthickness = 5, borderwidth = 1, relief = SOLID)
-label_planet_gravity_radius = Label(root, font=("castellar"), bg = "darkblue")
-label_planet_info = Label(root, font=("Sanssarif"), bg = "darkblue")
+label_planet_gravity_radius = Label(root, font=("castellar"), bg = "lightblue")
+label_planet_info = Label(root, font=("Sanssarif"), bg = "lightblue")
+
+
+planets=["mercury", "venus", "earth"]
+selectedval = StringVar()
+dropdown = ttk.Combobox(root, values = planets, textvariable = selectedval)
 
 def planetinfo():
-    pass
+    planet = selectedval.get()
+    
+    if planet == "mercury":
+        label_planet_name['text'] = "Mercury"
+        label_planet_image['image'] = Mercury
+        label_planet_gravity_radius['text'] = "Gravity: 3.7 m/s \n Radius: 2,439.7km"
+        label_planet_info['text'] = "Mercury is the smallest planet in our solar system and closest to the sun, its just slightly bigger than the earth's moon."
+        
+    elif planet == "venus":
+        label_planet_name['text'] = "Venus"
+        label_planet_image['image'] = Venus
+        label_planet_gravity_radius['text'] = "Gravity: 8.87 m/s \n Radius: 6,051.8km"
+        label_planet_info['text'] = "Venus is the most bright object in our solar system after the sun, it has a thin atmosphere too."
+        
+    elif planet == "earth":
+        label_planet_name['text'] = "Earth"
+        label_planet_image['image'] = Earth
+        label_planet_gravity_radius['text'] = "Gravity: 9.807 m/s \n Radius: 6,371km"
+        label_planet_info['text'] = "The Blue planet, Is where we all reside."
+        
+    
+dropdown.place(relx = 0.5, rely = 0.1, anchor=CENTER)
+    
+        
+    
 
 btn = Button(root, text = "show info!", command=planetinfo)
 btn.place(relx = 0.5, rely = 0.18, anchor=CENTER)
